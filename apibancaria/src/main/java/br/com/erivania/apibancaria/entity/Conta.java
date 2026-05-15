@@ -1,11 +1,14 @@
 package br.com.erivania.apibancaria.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.DialectOverride.GeneratedColumn;
 
 import br.com.erivania.apibancaria.enums.ContasEnums.StatusConta;
 import br.com.erivania.apibancaria.enums.ContasEnums.TipoConta;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -15,9 +18,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Conta {
+
+    public Conta() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,6 +55,9 @@ public class Conta {
     @ManyToOne
     @JoinColumn(name = "cliente_id") // chave estrageira
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Extrato> extratos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -78,6 +89,10 @@ public class Conta {
 
     public Cliente getCliente() {
         return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
 }

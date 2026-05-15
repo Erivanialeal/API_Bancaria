@@ -14,9 +14,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cliente {
+
+    public Cliente() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +39,7 @@ public class Cliente {
     private String telefone;
 
     @Column(name = "endereco", nullable = false, length = 200)
-    private String endereço;
+    private String endereco;
 
     @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
@@ -45,7 +49,62 @@ public class Cliente {
     private StatusCliente statusCliente;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Conta> contas = new ArrayList<>() {
+    private List<Conta> contas = new ArrayList<>();
 
-    };
+    // relaconamento com usuario
+    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private Usuario usuario;
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public LocalDate getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public StatusCliente getStatusCliente() {
+        return statusCliente;
+    }
+
+    public List<Conta> getContas() {
+        return contas;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
 }
