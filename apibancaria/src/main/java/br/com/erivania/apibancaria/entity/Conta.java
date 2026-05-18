@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.DialectOverride.GeneratedColumn;
-
 import br.com.erivania.apibancaria.enums.ContasEnums.StatusConta;
 import br.com.erivania.apibancaria.enums.ContasEnums.TipoConta;
 import jakarta.persistence.CascadeType;
