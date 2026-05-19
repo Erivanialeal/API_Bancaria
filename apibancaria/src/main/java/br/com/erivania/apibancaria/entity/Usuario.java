@@ -1,6 +1,6 @@
 package br.com.erivania.apibancaria.entity;
 
-import br.com.erivania.apibancaria.enums.RoleEnums.Role;
+import br.com.erivania.apibancaria.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,7 +27,7 @@ public class Usuario {
     @Column(name = "senha", nullable = false)
     private String senha;
 
-    private boolean ativo;
+    private boolean ativo = true;
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -66,6 +66,14 @@ public class Usuario {
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
 }
